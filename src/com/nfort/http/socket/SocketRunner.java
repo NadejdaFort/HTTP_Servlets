@@ -11,13 +11,13 @@ public class SocketRunner {
         // http - 80
         // https - 443
         // это поорты TCP
-        var inetAddress = Inet4Address.getByName("google.com");
-        try (var socket = new Socket(inetAddress, 80);
+        var inetAddress = Inet4Address.getByName("localhost");
+        try (var socket = new Socket(inetAddress, 7777);
              var outputStream = new DataOutputStream(socket.getOutputStream());
              var inputStream = new DataInputStream(socket.getInputStream())) {
             outputStream.writeUTF("Hello, World!");
-            var response = inputStream.readAllBytes();
-            System.out.println(response.length);
+//            var response = inputStream.readAllBytes();
+            System.out.println("Response from server: " + inputStream.readUTF());
         }
     }
 }
