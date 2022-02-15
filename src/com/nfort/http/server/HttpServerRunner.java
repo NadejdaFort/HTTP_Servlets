@@ -4,7 +4,7 @@ public class HttpServerRunner {
 
     public static void main(String[] args) {
 
-        var httpServer = new HttpServer(9000);
+        var httpServer = new HttpServer(100, 9000);
         httpServer.run();
     }
 }
