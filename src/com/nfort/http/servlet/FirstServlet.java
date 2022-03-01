@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
 
 @WebServlet("/first")
 public class FirstServlet extends HttpServlet {
@@ -17,15 +19,18 @@ public class FirstServlet extends HttpServlet {
         super.init(config);
     }
 
-//    @Override
-//    public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        super.service(req, resp);
-//    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("text/html");
+        var headerNames = req.getHeaderNames();
+        while (headerNames.hasMoreElements()){
+            String header = headerNames.nextElement();
+            System.out.println(req.getHeader(header));
+        }
+        resp.setContentType("text/html; charset=UTF-8");
+        resp.setHeader("token", "12345");
+//        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
         try (var writer = resp.getWriter()) {
+            writer.write("Привет с первого сервлета!");
             writer.write("<h1>Hello from First Servlet</h1>");
         }
     }
