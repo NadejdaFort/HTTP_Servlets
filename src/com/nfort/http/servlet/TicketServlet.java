@@ -29,12 +29,10 @@ public class TicketServlet extends HttpServlet {
             printWriter.write("<ul>");
             ticketService.findAllByFlightId(flightId).forEach(ticketDto -> printWriter.write("""
                     <li>
-                        %s               
+                        %s
                     </li>
-                    """.formatted(ticketDto.getSeatNo())
-            ));
+                    """.formatted(ticketDto.getSeatNo())));
             printWriter.write("</ul>");
         }
-
     }
 }
